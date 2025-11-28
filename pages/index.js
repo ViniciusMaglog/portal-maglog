@@ -107,7 +107,7 @@ export default function PortalPage() {
         {/* --- RODAPÉ DE AJUDA --- */}
         <div className="mt-12 text-center">
           <p className="text-gray-500 dark:text-gray-500 text-sm">
-            Precisa de ajuda ou acesso? Entre em contato com o suporte de TI.
+            Precisa de ajuda? Entre em contato com o suporte de TI.
           </p>
           <p className="text-gray-400 dark:text-gray-600 text-xs mt-2">
             © {new Date().getFullYear()} Maglog Transportes e Logística
