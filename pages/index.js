@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { ShoppingCart, Package, Monitor, DollarSign, ExternalLink } from 'lucide-react';
+import { ShoppingCart, Package, Monitor, DollarSign, ExternalLink, Wrench } from 'lucide-react';
 
 export default function PortalPage() {
   
@@ -41,7 +41,18 @@ export default function PortalPage() {
       cor: "bg-cyan-700", // Ciano Escuro (Padrão Maglog)
       hover: "hover:border-cyan-600",
       text: "text-cyan-800 dark:text-cyan-400"
+    },
+    {
+      titulo: "Manutenção",
+      descricao: "Solicitação de reparos prediais, elétricos, hidráulicos e equipamentos.",
+      link: "https://solicitacao-manutencao-theta.vercel.app/",
+      icone: <Wrench className="w-8 h-8 text-white" />, // Importe { Wrench } from 'lucide-react'
+      cor: "bg-orange-600",
+      hover: "hover:border-orange-500",
+      text: "text-orange-700 dark:text-orange-400"
     }
+
+    
   ];
 
   return (
