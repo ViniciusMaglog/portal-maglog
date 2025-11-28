@@ -1,77 +1,119 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import Head from 'next/head';
+import Image from 'next/image';
+import { ShoppingCart, Package, Monitor, DollarSign, ExternalLink } from 'lucide-react';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+export default function PortalPage() {
+  
+  // Configuração dos Sistemas (Links e Ícones)
+  const sistemas = [
+    {
+      titulo: "Solicitação de Compras",
+      descricao: "Requisição de materiais, serviços e insumos para os setores.",
+      link: "https://solicitacao-compras.vercel.app/",
+      icone: <ShoppingCart className="w-8 h-8 text-white" />,
+      cor: "bg-emerald-600", // Verde
+      hover: "hover:border-emerald-500",
+      text: "text-emerald-700 dark:text-emerald-400"
+    },
+    {
+      titulo: "Almoxarifado",
+      descricao: "Pedidos de materiais de escritório, embalagens e itens de estoque.",
+      link: "https://requisicao-almoxarifado.vercel.app/",
+      icone: <Package className="w-8 h-8 text-white" />,
+      cor: "bg-blue-600", // Azul
+      hover: "hover:border-blue-500",
+      text: "text-blue-700 dark:text-blue-400"
+    },
+    {
+      titulo: "Ativo Fixo",
+      descricao: "Solicitação de movimentação, baixa ou aquisição de bens patrimoniais.",
+      link: "https://ativo-fixo.vercel.app/",
+      icone: <Monitor className="w-8 h-8 text-white" />,
+      cor: "bg-purple-600", // Roxo
+      hover: "hover:border-purple-500",
+      text: "text-purple-700 dark:text-purple-400"
+    },
+    {
+      titulo: "Financeiro",
+      descricao: "Solicitação de pagamentos, reembolsos de despesas e adiantamentos.",
+      link: "https://requisicao-financeira.vercel.app/",
+      icone: <DollarSign className="w-8 h-8 text-white" />,
+      cor: "bg-cyan-700", // Ciano Escuro (Padrão Maglog)
+      hover: "hover:border-cyan-600",
+      text: "text-cyan-800 dark:text-cyan-400"
+    }
+  ];
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-export default function Home() {
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
-    >
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the index.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 font-sans transition-colors duration-300">
+      <Head>
+        <title>Central de Solicitações - Maglog</title>
+        <meta name="description" content="Portal de acesso aos sistemas internos Maglog" />
+      </Head>
+
+      {/* --- CABEÇALHO --- */}
+      <header className="bg-white dark:bg-gray-800 shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center">
+            {/* Certifique-se de ter o logo.png na pasta public */}
+            <Image src="/logo.png" alt="Maglog" width={160} height={50} priority className="h-auto" />
+          </div>
+          <div className="text-center sm:text-right">
+            <h1 className="text-xl font-bold text-gray-800 dark:text-white">Central de Solicitações</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">O que você precisa solicitar hoje?</p>
+          </div>
+        </div>
+      </header>
+
+      {/* --- CONTEÚDO PRINCIPAL --- */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6">
+          {sistemas.map((sistema, index) => (
+            <a 
+              key={index} 
+              href={sistema.link}
+              target="_blank" // Abre em nova aba (opcional, remova se quiser na mesma)
+              rel="noopener noreferrer"
+              className={`group relative bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 border-2 border-transparent ${sistema.hover} overflow-hidden flex flex-col`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              {/* Topo Colorido com Ícone */}
+              <div className={`${sistema.cor} p-6 flex justify-center items-center transition-colors`}>
+                <div className="bg-white/20 p-3 rounded-full backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
+                  {sistema.icone}
+                </div>
+              </div>
+
+              {/* Corpo do Card */}
+              <div className="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 className={`text-xl font-bold mb-2 ${sistema.text}`}>
+                    {sistema.titulo}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                    {sistema.descricao}
+                  </p>
+                </div>
+                
+                <div className="mt-6 flex items-center text-sm font-semibold text-gray-500 dark:text-gray-400 group-hover:text-gray-800 dark:group-hover:text-white transition-colors">
+                  <span>Acessar Sistema</span>
+                  <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* --- RODAPÉ DE AJUDA --- */}
+        <div className="mt-12 text-center">
+          <p className="text-gray-500 dark:text-gray-500 text-sm">
+            Precisa de ajuda ou acesso? Entre em contato com o suporte de TI.
+          </p>
+          <p className="text-gray-400 dark:text-gray-600 text-xs mt-2">
+            © {new Date().getFullYear()} Maglog Transportes e Logística
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs/pages/getting-started?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
       </main>
     </div>
   );
